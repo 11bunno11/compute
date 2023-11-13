@@ -1,3 +1,7 @@
+bluetooth.onBluetoothConnected(function () {
+    keyboard.sendString(keyboard.modifiers(keyboard._Modifier.rightApple))
+    keyboard.sendString(keyboard.keys(keyboard._Key.tab))
+})
 input.onGesture(Gesture.Shake, function () {
     Start = 0
     Write = 0
@@ -11,17 +15,38 @@ input.onGesture(Gesture.Shake, function () {
         break;
     }
     while (Shook == 1) {
-        led.plot(randint(0, 4), 0)
-        led.unplot(randint(0, 4), 0)
-        led.plot(randint(0, 4), 1)
-        led.unplot(randint(0, 4), 1)
-        led.plot(randint(0, 4), 2)
-        led.unplot(randint(0, 4), 2)
-        led.plot(randint(0, 4), 3)
-        led.unplot(randint(0, 4), 3)
-        led.plot(randint(0, 4), 4)
-        led.unplot(randint(0, 4), 4)
+        for (let index = 0; index < 2; index++) {
+            images.createBigImage(`
+                # . . # . . # . . .
+                # . . # . . # . . .
+                . # . . # . . # . .
+                . # . . # . . # . .
+                . . # . . # . . # .
+                `).scrollImage(1, 200)
+        }
+        basic.showString("HALT")
+        for (let index = 0; index < 2; index++) {
+            images.createBigImage(`
+                # . . # . . # . . .
+                # . . # . . # . . .
+                . # . . # . . # . .
+                . # . . # . . # . .
+                . . # . . # . . # .
+                `).scrollImage(1, 200)
+        }
     }
+})
+input.onLogoEvent(TouchButtonEvent.Pressed, function () {
+    Shook = 0
+    Start = 0
+    Write = 0
+    Shook = 0
+    basic.showString("@WunderMrow")
+    Shook = 0
+    music.play(music.createSoundExpression(WaveShape.Square, 1, 444, 0, 255, 9999, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+    Shook = 0
+    Start = 1
+    Shook = 0
 })
 let TogY = 0
 let Tog = 0
@@ -33,11 +58,6 @@ Start = 0
 Shook = 0
 music.play(music.createSoundExpression(WaveShape.Square, 1, 444, 0, 255, 9999, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
 Start = 1
-basic.forever(function () {
-    if (Start == 1 && Write == 1) {
-        datalogger.log(datalogger.createCV("", "X" + Tog + "Y" + TogY))
-    }
-})
 basic.forever(function () {
     if (Start == 1) {
         music.play(music.createSoundExpression(
@@ -66,8 +86,10 @@ basic.forever(function () {
     	
     }
 })
-control.inBackground(function () {
-	
+basic.forever(function () {
+    if (Start == 1 && Write == 1) {
+        datalogger.log(datalogger.createCV("", "X" + Tog + "Y" + TogY))
+    }
 })
 loops.everyInterval(randint(2, 1000), function () {
     for (let index = 0; index < randint(2, 1000); index++) {

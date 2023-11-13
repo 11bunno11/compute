@@ -3,11 +3,11 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "radio": "*",
         "microphone": "*",
         "datalogger": "*",
         "audio-recording": "*",
-        "midi": "github:microsoft/pxt-midi#v2.2.0"
+        "midi": "github:microsoft/pxt-midi#v2.2.0",
+        "microbit-pxt-blehid": "github:bsiever/microbit-pxt-blehid#v0.0.24"
     },
     "files": [
         "main.blocks",
