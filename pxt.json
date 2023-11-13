@@ -5,8 +5,9 @@
         "core": "*",
         "radio": "*",
         "microphone": "*",
-        "pxt-morse": "github:bsiever/pxt-morse#v2.0.0",
-        "datalogger": "*"
+        "datalogger": "*",
+        "audio-recording": "*",
+        "midi": "github:microsoft/pxt-midi#v2.2.0"
     },
     "files": [
         "main.blocks",
